@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="signupContext" prefHeight="414.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.SignupFormController">
+   <children>
+      <Label layoutX="356.0" layoutY="14.0" text="Register here" textFill="#ff3c00">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="356.0" layoutY="50.0" prefHeight="3.0" prefWidth="298.0" />
+      <ImageView fitHeight="414.0" fitWidth="327.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/doctor-job-description-3602x2401-20201125.jpeg" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txtFirstName" labelFloat="true" layoutX="345.0" layoutY="62.0" prefHeight="37.0" prefWidth="157.0" promptText="First Name">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtLastName" labelFloat="true" layoutX="511.0" layoutY="62.0" prefHeight="37.0" prefWidth="148.0" promptText="Last Name">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="345.0" layoutY="121.0" prefHeight="37.0" prefWidth="315.0" promptText="Enter email here">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="345.0" layoutY="180.0" prefHeight="36.0" prefWidth="315.0" promptText="Password here">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXRadioButton fx:id="rBtnDoctor" layoutX="347.0" layoutY="233.0" selected="true" text="Doctor">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="accountType" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="440.0" layoutY="233.0" text="Patient" toggleGroup="$accountType">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXButton buttonType="RAISED" layoutX="347.0" layoutY="266.0" onAction="#signUpOnAction" prefHeight="31.0" prefWidth="315.0" style="-fx-background-color: #0D99FF;" text="Sign up" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="494.0" layoutY="313.0" text="OR" textFill="#ff3c00">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="349.0" layoutY="343.0" onAction="#alreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="315.0" style="-fx-background-color: #1A2238;" text="Already have an Account" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="349.0" layoutY="388.0" text="From : Developers Stack" />
+      <Label layoutX="591.0" layoutY="388.0" text="Version : 1.0.0" />
+   </children>
+</AnchorPane>

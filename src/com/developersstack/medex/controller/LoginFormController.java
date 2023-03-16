@@ -34,10 +34,7 @@ public class LoginFormController {
                     if (dto.getAccountType().equals(accountType)) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Success!").show();
                         Cookie.selectedUser=dto;
-                        Stage stage =(Stage) loginContext.getScene().getWindow();
-                        stage.setScene(new Scene(FXMLLoader.
-                                load(getClass().getResource("../view/DoctorDashboardForm.fxml"))));
-                        stage.centerOnScreen();
+                        setUi("DoctorDashboardForm");
                         return;
                     } else {
                         /*new Alert(Alert.AlertType.WARNING,
@@ -58,9 +55,12 @@ public class LoginFormController {
     }
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
+      setUi("SignupForm");
+    }
+    private void setUi(String location) throws IOException {
         Stage stage =(Stage) loginContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.
-                load(getClass().getResource("../view/SignupForm.fxml"))));
+                load(getClass().getResource("../view/"+location+".fxml"))));
         stage.centerOnScreen();
     }
 }

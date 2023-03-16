@@ -17,7 +17,7 @@ public class AppInitializer extends Application {
     public void start(Stage primaryStage) throws IOException {
         /*relative path ? , absolute path ?*/
         primaryStage.setScene(
-                new Scene(FXMLLoader.load(getClass().getResource("./view/LoginForm.fxml"))));
+                new Scene(FXMLLoader.load(getClass().getResource("./view/DoctorDashboardForm.fxml"))));
         primaryStage.show();
     }
 }

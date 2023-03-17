@@ -5,8 +5,10 @@ import com.developersstack.medex.dto.DoctorDto;
 import com.developersstack.medex.dto.UserDto;
 import com.developersstack.medex.enums.GenderType;
 import com.developersstack.medex.util.Cookie;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,9 +26,24 @@ public class DoctorRegistrationFormController {
     public TextArea txtAddress;
     public JFXRadioButton rBtnMale;
     public AnchorPane doctorRegistrationContext;
+    public JFXButton btnSubmit;
 
-    public void initialize(){
+    public void initialize() {
         loadUserData();
+
+
+        //-----------------------------
+        txtNic.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Database.doctorTable.stream().filter(e->e.getNic().equals(newValue)).findFirst().isPresent()){
+                new Alert(Alert.AlertType.WARNING, "NIC Conflict!").show();
+                btnSubmit.setDisable(true);
+                return;
+            }
+            //if (btnSubmit.isDisable())btnSubmit.setDisable(false);
+            btnSubmit.setDisable(false);
+        });
+        //-----------------------------
+
     }
 
     private void loadUserData() {
@@ -38,6 +55,12 @@ public class DoctorRegistrationFormController {
 
     public void submitDataOnAction(ActionEvent actionEvent) {
 
+        if (Database.doctorTable.stream().filter(e->e.getNic().equals(txtNic.getText().trim())).findFirst().isPresent()){
+            new Alert(Alert.AlertType.WARNING, "NIC Conflict!").show();
+            btnSubmit.setDisable(true);
+            return;
+        }
+
         DoctorDto doctorDto = new DoctorDto(
                 txtFirstName.getText().trim(),
                 txtLastName.getText().trim(),
@@ -46,10 +69,10 @@ public class DoctorRegistrationFormController {
                 txtEmail.getText(),
                 txtSpecializations.getText(),
                 txtAddress.getText(),
-                rBtnMale.isSelected()? GenderType.MALE:GenderType.FE_MALE
+                rBtnMale.isSelected() ? GenderType.MALE : GenderType.FE_MALE
         );
         Database.doctorTable.add(doctorDto);
-       Stage stage = (Stage) doctorRegistrationContext.getScene().getWindow();
-       stage.close();
+        Stage stage = (Stage) doctorRegistrationContext.getScene().getWindow();
+        stage.close();
     }
 }

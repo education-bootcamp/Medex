@@ -67,7 +67,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXRadioButton>
-      <JFXButton buttonType="RAISED" layoutX="582.0" layoutY="384.0" onAction="#submitDataOnAction" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
+      <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="582.0" layoutY="384.0" onAction="#submitDataOnAction" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

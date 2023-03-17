@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="doctorDashboardContext" prefHeight="463.0" prefWidth="788.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.DoctorDashboardFormController">
    <children>
       <Label layoutX="14.0" layoutY="22.0" text="Doctor Dashboard" textFill="#ff6600">
@@ -28,6 +27,14 @@
       </Label>
       <Separator layoutX="319.0" layoutY="26.0" orientation="VERTICAL" prefHeight="21.0" prefWidth="0.0" />
       <JFXButton buttonType="RAISED" layoutX="722.0" layoutY="22.0" style="-fx-background-color: #012E6A;" text="Logout" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="70.0" onAction="#navigateToPatientManagementPage" prefHeight="100.0" prefWidth="285.0" style="-fx-background-color: #012E6A;" text="Patient Management" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

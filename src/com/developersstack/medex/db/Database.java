@@ -28,7 +28,7 @@ public class Database {
         userTable.add(new UserDto("shashika","nirmal",
                 "shashika@gmail.com","1234", AccountType.DOCTOR));
         //----------------
-       /* doctorTable.add(
+        doctorTable.add(
                 new DoctorDto(
                         "Shashika",
                         "Nirmal",
@@ -39,7 +39,7 @@ public class Database {
                         "Colombo",
                         GenderType.MALE
                 )
-        );*/
+        );
         try{
             patientTable.add(
                     new PatientDto("95","Hasika","Sandaruwan",

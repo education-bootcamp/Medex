@@ -30,6 +30,7 @@ public class DoctorDashboardFormController {
     public void initialize() throws IOException {
         //checkUser();
         initializeData();
+        checkDoctorData();
     }
 
     private void initializeData() throws IOException {
@@ -53,27 +54,33 @@ public class DoctorDashboardFormController {
         timeline.play();
         //------------------
         // check doctor account (to be implemented)
-       checkDoctorData();
     }
+
     private void checkDoctorData() throws IOException {
         Optional<DoctorDto> selectedDoctor =
                 Database.doctorTable.stream()
                         .filter(e -> e.getEmail().equals("shashika@gmail.com"))
                         .findFirst();
-        if (!selectedDoctor.isPresent()){
-            setUi("DoctorRegistrationForm");
+        if (!selectedDoctor.isPresent()) {
+            Stage stage = new Stage();
+            stage.setScene(new Scene(FXMLLoader.
+                    load(getClass().getResource("../view/DoctorRegistrationForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
         }
     }
 
     public void checkUser() throws IOException {
         if (null == Cookie.selectedUser) {
-           setUi("LoginForm");
+            setUi("LoginForm");
         }
     }
+
     private void setUi(String location) throws IOException {
         Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
+        System.out.println(stage);
         stage.setScene(new Scene(FXMLLoader.
-                load(getClass().getResource("../view/"+location+".fxml"))));
+                load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.centerOnScreen();
     }
 }

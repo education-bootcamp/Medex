@@ -23,7 +23,7 @@ public class Database {
         userTable.add(new UserDto("shashika","nirmal",
                 "shashika@gmail.com","1234", AccountType.DOCTOR));
         //----------------
-        doctorTable.add(
+       /* doctorTable.add(
                 new DoctorDto(
                         "Shashika",
                         "Nirmal",
@@ -34,7 +34,7 @@ public class Database {
                         "Colombo",
                         GenderType.MALE
                 )
-        );
+        );*/
         //----------------
 
     }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="428.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.DoctorRegistrationFormController">
+   <children>
+      <Label layoutX="24.0" layoutY="12.0" text="Doctor Dashboard" textFill="#ff6600">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="24.0" layoutY="42.0" prefHeight="4.0" prefWidth="660.0" />
+      <TextField fx:id="txtFirstName" editable="false" layoutX="24.0" layoutY="58.0" promptText="First Name">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtLastName" editable="false" layoutX="205.0" layoutY="58.0" promptText="Last Name">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtNic" layoutX="386.0" layoutY="58.0" promptText="NIC">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtContact" layoutX="307.0" layoutY="97.0" prefHeight="29.0" prefWidth="209.0" promptText="Contact">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmail" editable="false" layoutX="24.0" layoutY="97.0" prefHeight="29.0" prefWidth="272.0" promptText="Email">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSpecializations" layoutX="24.0" layoutY="139.0" prefHeight="29.0" prefWidth="216.0" promptText="Specializations">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="txtAddress" layoutX="24.0" layoutY="181.0" prefHeight="200.0" prefWidth="660.0" promptText="Address">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextArea>
+      <JFXRadioButton fx:id="rBtnmale" layoutX="262.0" layoutY="144.0" selected="true" text="Male">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="340.0" layoutY="144.0" text="Fe Male" toggleGroup="$gender">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXButton buttonType="RAISED" layoutX="582.0" layoutY="384.0" onAction="#submitDataOnAction" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>

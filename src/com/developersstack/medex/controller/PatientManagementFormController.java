@@ -9,7 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import java.text.SimpleDateFormat;
 
 public class PatientManagementFormController {
     public TextField txtSearch;
@@ -26,6 +29,19 @@ public class PatientManagementFormController {
 
     public void initialize(){
         loadAllData("");//? search text
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            loadAllData(newValue);
+        });
+
+        colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("genderType"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 
     private void loadAllData(String s) {
@@ -44,7 +60,8 @@ public class PatientManagementFormController {
                                 dto.getNic(),
                                 dto.getFirstName(),
                                 dto.getLastName(),
-                                dto.getDob(),
+                                new SimpleDateFormat("yyyy-MM-dd")
+                                        .format(dto.getDob()),
                                 dto.getGenderType(),
                                 dto.getAddress(),
                                 10,

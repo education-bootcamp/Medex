@@ -1,5 +1,7 @@
 package com.developersstack.medex.controller;
 
+import com.developersstack.medex.db.Database;
+import com.developersstack.medex.dto.DoctorDto;
 import com.developersstack.medex.util.Cookie;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -15,7 +17,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 public class DoctorDashboardFormController {
 
@@ -28,7 +32,7 @@ public class DoctorDashboardFormController {
         initializeData();
     }
 
-    private void initializeData() {
+    private void initializeData() throws IOException {
         /*Date date = new Date();
         SimpleDateFormat simpleDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd");
@@ -47,14 +51,29 @@ public class DoctorDashboardFormController {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+        //------------------
+        // check doctor account (to be implemented)
+       checkDoctorData();
+    }
+    private void checkDoctorData() throws IOException {
+        Optional<DoctorDto> selectedDoctor =
+                Database.doctorTable.stream()
+                        .filter(e -> e.getEmail().equals("shashika@gmail.com"))
+                        .findFirst();
+        if (!selectedDoctor.isPresent()){
+            setUi("DoctorRegistrationForm");
+        }
     }
 
     public void checkUser() throws IOException {
         if (null == Cookie.selectedUser) {
-            Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.
-                    load(getClass().getResource("../view/LoginForm.fxml"))));
-            stage.centerOnScreen();
+           setUi("LoginForm");
         }
+    }
+    private void setUi(String location) throws IOException {
+        Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.
+                load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.centerOnScreen();
     }
 }

@@ -34,9 +34,10 @@ public class DoctorRegistrationFormController {
 
         //-----------------------------
         txtNic.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (Database.doctorTable.stream().filter(e->e.getNic().equals(newValue)).findFirst().isPresent()){
+            if (true){
                 new Alert(Alert.AlertType.WARNING, "NIC Conflict!").show();
                 btnSubmit.setDisable(true);
+                txtNic.setStyle("-fx-border-color: red");
                 return;
             }
             //if (btnSubmit.isDisable())btnSubmit.setDisable(false);

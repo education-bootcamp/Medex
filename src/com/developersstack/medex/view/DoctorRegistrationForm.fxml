@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="428.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.DoctorRegistrationFormController">
+<AnchorPane fx:id="doctorRegistrationContext" prefHeight="428.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.DoctorRegistrationFormController">
    <children>
       <Label layoutX="24.0" layoutY="12.0" text="Doctor Dashboard" textFill="#ff6600">
          <font>
@@ -55,7 +54,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextArea>
-      <JFXRadioButton fx:id="rBtnmale" layoutX="262.0" layoutY="144.0" selected="true" text="Male">
+      <JFXRadioButton fx:id="rBtnMale" layoutX="262.0" layoutY="144.0" selected="true" text="Male">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

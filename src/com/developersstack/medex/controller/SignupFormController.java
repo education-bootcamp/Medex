@@ -1,6 +1,7 @@
 package com.developersstack.medex.controller;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
+import com.developersstack.medex.util.IdGenerator;
 import com.developersstack.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
@@ -36,12 +37,13 @@ public class SignupFormController {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/medex",
+            Connection connection =DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/medex",
                             "root",
                             "1234" );
             String sql = "INSERT INTO user VALUES (?,?,?,?,?,?)";
             PreparedStatement pstm = connection.prepareStatement(sql);
-            pstm.setInt(1,1001);
+            pstm.setInt(1,new IdGenerator().generateId());
             pstm.setString(2, user.getFirstName());
             pstm.setString(3, user.getLastName());
             pstm.setString(4, user.getEmail());

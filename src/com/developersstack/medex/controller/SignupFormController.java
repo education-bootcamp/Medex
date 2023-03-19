@@ -2,6 +2,7 @@ package com.developersstack.medex.controller;
 import com.developersstack.medex.db.DBConnection;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
+import com.developersstack.medex.util.CrudUtil;
 import com.developersstack.medex.util.IdGenerator;
 import com.developersstack.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXPasswordField;
@@ -37,16 +38,12 @@ public class SignupFormController {
                 rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
         try {
-            String sql = "INSERT INTO user VALUES (?,?,?,?,?,?)";
-            PreparedStatement pstm =  DBConnection.getInstance().getConnection().prepareStatement(sql);
-            pstm.setInt(1,new IdGenerator().generateId());
-            pstm.setString(2, user.getFirstName());
-            pstm.setString(3, user.getLastName());
-            pstm.setString(4, user.getEmail());
-            pstm.setString(5, user.getPassword());
-            pstm.setString(6, user.getAccountType().name());
-            int isSaved = pstm.executeUpdate();
-            if (isSaved>0){
+            boolean isSaved = CrudUtil.executeUpdate(
+                    "INSERT INTO user VALUES (?,?,?,?,?,?)",
+                    new IdGenerator().generateId(),user.getFirstName(),user.getLastName(),user.getEmail(),
+                    user.getPassword(),user.getAccountType().name()
+            );
+            if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
                 setUi();
             }else {

@@ -30,7 +30,8 @@ public class PatientManagementFormController {
     public void initialize(){
         loadAllData("");//? search text
 
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+        txtSearch.textProperty()
+                .addListener((observable, oldValue, newValue) -> {
             loadAllData(newValue);
         });
 

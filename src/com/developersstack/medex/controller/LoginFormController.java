@@ -4,6 +4,7 @@ import com.developersstack.medex.db.Database;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
 import com.developersstack.medex.util.Cookie;
+import com.developersstack.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class LoginFormController {
     public JFXTextField txtEmail;
@@ -27,31 +29,33 @@ public class LoginFormController {
         String password = txtPassword.getText();
         AccountType accountType = rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT;
         //if (rBtnDoctor.isSelected())accountType= AccountType.DOCTOR;
-        for (User dto : Database.userTable
-        ) {
-            if (dto.getEmail().trim().toLowerCase().equals(email)) {
-                if (dto.getPassword().equals(password)) {
-                    if (dto.getAccountType().equals(accountType)) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Success!").show();
-                        Cookie.selectedUser=dto;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/medex",
+                    "root",
+                    "1234" );
+            String sql = "SELECT * FROM user WHERE email=? AND account_type=?";
+            PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setString(1,email);
+            pstm.setString(2,accountType.name());
+            ResultSet resultSet = pstm.executeQuery();
+            if (resultSet.next()){
+                if (new PasswordConfig().decrypt(password,resultSet.getString("password"))){
+                    if (accountType.equals(AccountType.DOCTOR)){
                         setUi("DoctorDashboardForm");
-                        return;
-                    } else {
-                        /*new Alert(Alert.AlertType.WARNING,
-                                "We can't find Your "+accountType+" Account");*/
-                        new Alert(Alert.AlertType.WARNING,
-                                String.format("We can't find Your %s Account", accountType.name())).show();
-                        return;
+                    }else{
+                        setUi("PatientDashboardForm");
                     }
-                } else {
-                    new Alert(Alert.AlertType.WARNING,
-                            "Your Password is incorrect!").show();
-                    return;
                 }
+            }else{
+                new Alert(Alert.AlertType.WARNING,
+                        String.format("we can't find an email (%s)",email)).show();
             }
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
         }
-        new Alert(Alert.AlertType.WARNING,
-                String.format("we can't find an email (%s)",email)).show();
+
     }
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {

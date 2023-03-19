@@ -1,6 +1,7 @@
 package com.developersstack.medex.controller;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
+import com.developersstack.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -30,7 +31,7 @@ public class SignupFormController {
         User user = new User(txtFirstName.getText(),
                 txtLastName.getText(),
                 txtEmail.getText().trim().toLowerCase(),
-                txtPassword.getText(),
+                new PasswordConfig().encrypt(txtPassword.getText()),
                 rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
         try {
@@ -49,6 +50,7 @@ public class SignupFormController {
             int isSaved = pstm.executeUpdate();
             if (isSaved>0){
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
+                setUi();
             }else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }

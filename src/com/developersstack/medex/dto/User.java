@@ -2,17 +2,17 @@ package com.developersstack.medex.dto;
 
 import com.developersstack.medex.enums.AccountType;
 
-public class UserDto {
+public class User {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private AccountType accountType;
 
-    public UserDto() {
+    public User() {
     }
 
-    public UserDto(String firstName, String lastName, String email, String password, AccountType accountType) {
+    public User(String firstName, String lastName, String email, String password, AccountType accountType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

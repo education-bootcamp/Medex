@@ -2,17 +2,16 @@ package com.developersstack.medex.db;
 
 import com.developersstack.medex.dto.DoctorDto;
 import com.developersstack.medex.dto.PatientDto;
-import com.developersstack.medex.dto.UserDto;
+import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
 import com.developersstack.medex.enums.GenderType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Database {
     //------------
-    public static ArrayList<UserDto> userTable =
+    public static ArrayList<User> userTable =
             new ArrayList();
     public static ArrayList<DoctorDto> doctorTable =
             new ArrayList<>();
@@ -23,9 +22,9 @@ public class Database {
 
     static {
         //----------------
-        userTable.add(new UserDto("Hasika","Sandaruwan",
+        userTable.add(new User("Hasika","Sandaruwan",
                 "hasika@gmail.com","1234", AccountType.PATIENT));
-        userTable.add(new UserDto("shashika","nirmal",
+        userTable.add(new User("shashika","nirmal",
                 "shashika@gmail.com","1234", AccountType.DOCTOR));
         //----------------
         doctorTable.add(

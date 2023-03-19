@@ -1,7 +1,7 @@
 package com.developersstack.medex.controller;
 
 import com.developersstack.medex.db.Database;
-import com.developersstack.medex.dto.UserDto;
+import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
 import com.developersstack.medex.util.Cookie;
 import com.jfoenix.controls.JFXPasswordField;
@@ -27,7 +27,7 @@ public class LoginFormController {
         String password = txtPassword.getText();
         AccountType accountType = rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT;
         //if (rBtnDoctor.isSelected())accountType= AccountType.DOCTOR;
-        for (UserDto dto : Database.userTable
+        for (User dto : Database.userTable
         ) {
             if (dto.getEmail().trim().toLowerCase().equals(email)) {
                 if (dto.getPassword().equals(password)) {

@@ -38,7 +38,7 @@ public class SignupFormController {
                 rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
         try {
-            boolean isSaved = CrudUtil.executeUpdate(
+            boolean isSaved = CrudUtil.execute(
                     "INSERT INTO user VALUES (?,?,?,?,?,?)",
                     new IdGenerator().generateId(),user.getFirstName(),user.getLastName(),user.getEmail(),
                     user.getPassword(),user.getAccountType().name()

@@ -32,7 +32,7 @@ public class LoginFormController {
         AccountType accountType = rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT;
         //if (rBtnDoctor.isSelected())accountType= AccountType.DOCTOR;
         try{
-            ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM user WHERE email=? AND account_type=?",
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",
                     email,accountType.name());
             if (resultSet.next()){
                 if (new PasswordConfig().decrypt(password,resultSet.getString("password"))){

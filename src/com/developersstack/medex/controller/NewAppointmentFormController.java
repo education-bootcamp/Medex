@@ -1,6 +1,7 @@
 package com.developersstack.medex.controller;
 
 import com.developersstack.medex.util.CrudUtil;
+import com.developersstack.medex.view.tm.DoctorComboView;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class NewAppointmentFormController {
     public AnchorPane newAppointmentContext;
@@ -22,6 +25,8 @@ public class NewAppointmentFormController {
     public JFXTextField txtAmount;
     public JFXTextArea txtMessage;
 
+    private ArrayList<DoctorComboView> viewList = new ArrayList<>();
+
     public void initialize() {
         setDoctorIds();
     }
@@ -30,12 +35,18 @@ public class NewAppointmentFormController {
         try {
             ResultSet set = CrudUtil.execute("SELECT doctor_Id,first_name,last_name FROM doctor");
             ObservableList<String> obList = FXCollections.observableArrayList();
+            int index=1;
             while (set.next()) {
-                obList.add(set.getString(1));
+                DoctorComboView viewData = new DoctorComboView(index, set.getString(1),
+                        set.getString(2) + " " + set.getString(3));
+                viewList.add(viewData);
+                obList.add(index+". "+viewData.getName());
+                index++;
+
             }
             cmbDoctors.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
-
+            e.printStackTrace();
         }
 
     }
@@ -45,6 +56,17 @@ public class NewAppointmentFormController {
     }
 
     public void seeAvailabilityOnAction(ActionEvent actionEvent) {
+
+        Optional<DoctorComboView> selectedRecord = viewList.stream().filter(
+                e -> e.getIndex() == Integer.parseInt(cmbDoctors.getValue()
+                        .split("\\.")[0])).findFirst();
+        if (selectedRecord.isPresent()){
+            System.out.println(selectedRecord.get().getDocId());
+            System.out.println(txtDate.getValue());
+            System.out.println(txtTime.getValue());
+        }else{
+            System.out.println("Empty");
+        }
 
     }
 

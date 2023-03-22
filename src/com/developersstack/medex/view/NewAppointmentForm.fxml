@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="newAppointmentContext" prefHeight="400.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.NewAppointmentForm">
+   <children>
+      <Label layoutX="24.0" layoutY="32.0" text="Make an Appointment" textFill="#ff6600">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="24.0" layoutY="62.0" prefHeight="3.0" prefWidth="652.0" />
+      <JFXButton buttonType="RAISED" layoutX="587.0" layoutY="32.0" onAction="#backToHomeOnAction" style="-fx-background-color: #012E6A;" text="Back to home" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="cmbDoctors" labelFloat="true" layoutX="24.0" layoutY="72.0" prefHeight="25.0" prefWidth="123.0" promptText="Doctor Name" />
+      <JFXDatePicker fx:id="txtDate" layoutX="166.0" layoutY="72.0" promptText="Date" />
+      <JFXTimePicker fx:id="txtTime" layoutX="346.0" layoutY="72.0" promptText="Time" />
+      <JFXButton buttonType="RAISED" layoutX="531.0" layoutY="72.0" onAction="#seeAvailabilityOnAction" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #2E7D32;" text="See Availability" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField fx:id="txtAmount" editable="false" labelFloat="true" layoutX="24.0" layoutY="121.0" promptText="Amount">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton buttonType="RAISED" layoutX="531.0" layoutY="361.0" onAction="#submitDataOnAction" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextArea fx:id="txtMessage" labelFloat="true" layoutX="24.0" layoutY="162.0" prefHeight="185.0" prefWidth="652.0" promptText="Extra Message">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXTextArea>
+   </children>
+</AnchorPane>

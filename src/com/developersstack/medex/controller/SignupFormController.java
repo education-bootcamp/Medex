@@ -1,5 +1,4 @@
 package com.developersstack.medex.controller;
-import com.developersstack.medex.db.DBConnection;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
 import com.developersstack.medex.util.CrudUtil;
@@ -16,10 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SignupFormController {

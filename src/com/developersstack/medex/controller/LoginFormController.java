@@ -1,7 +1,5 @@
 package com.developersstack.medex.controller;
 
-import com.developersstack.medex.db.DBConnection;
-import com.developersstack.medex.db.Database;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.AccountType;
 import com.developersstack.medex.util.Cookie;
@@ -30,35 +28,51 @@ public class LoginFormController {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         AccountType accountType = rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT;
-        //if (rBtnDoctor.isSelected())accountType= AccountType.DOCTOR;
-        try{
+        try {
             ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",
-                    email,accountType.name());
-            if (resultSet.next()){
-                if (new PasswordConfig().decrypt(password,resultSet.getString("password"))){
-                    if (accountType.equals(AccountType.DOCTOR)){
-                        setUi("DoctorDashboardForm");
-                    }else{
-                        setUi("PatientDashboardForm");
+                    email, accountType.name());
+            if (resultSet.next()) {
+                if (new PasswordConfig().decrypt(password, resultSet.getString("password"))) {
+                    if (accountType.equals(AccountType.PATIENT)) {
+
+                        ResultSet selectedPatientResult =
+                                CrudUtil.execute("SELECT patient_id FROM patient WHERE email=?", email);
+                        if (selectedPatientResult.next()) {
+                            Cookie.selectedUser = new User(
+                                    resultSet.getString("first_name"),
+                                    resultSet.getString("last_name"),
+                                    resultSet.getString("email"),
+                                    "",
+                                    AccountType.PATIENT
+                            );
+                            setUi("PatientDashboardForm");
+                        } else {
+                            //setUi("PatientDashboardForm");
+                        }
+
+                        //setUi("DoctorDashboardForm");
+                    } else {
+                        //
                     }
                 }
-            }else{
+            } else {
                 new Alert(Alert.AlertType.WARNING,
-                        String.format("we can't find an email (%s)",email)).show();
+                        String.format("we can't find an email (%s)", email)).show();
             }
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
     }
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
-      setUi("SignupForm");
+        setUi("SignupForm");
     }
+
     private void setUi(String location) throws IOException {
-        Stage stage =(Stage) loginContext.getScene().getWindow();
+        Stage stage = (Stage) loginContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.
-                load(getClass().getResource("../view/"+location+".fxml"))));
+                load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.centerOnScreen();
     }
 }

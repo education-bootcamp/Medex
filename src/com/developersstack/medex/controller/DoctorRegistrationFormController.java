@@ -5,14 +5,21 @@ import com.developersstack.medex.dto.DoctorDto;
 import com.developersstack.medex.dto.User;
 import com.developersstack.medex.enums.GenderType;
 import com.developersstack.medex.util.Cookie;
+import com.developersstack.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DoctorRegistrationFormController {
     public TextField txtFirstName;
@@ -28,21 +35,6 @@ public class DoctorRegistrationFormController {
 
     public void initialize() {
         loadUserData();
-
-
-        //-----------------------------
-        txtNic.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (true){
-                new Alert(Alert.AlertType.WARNING, "NIC Conflict!").show();
-                btnSubmit.setDisable(true);
-                txtNic.setStyle("-fx-border-color: red");
-                return;
-            }
-            //if (btnSubmit.isDisable())btnSubmit.setDisable(false);
-            btnSubmit.setDisable(false);
-        });
-        //-----------------------------
-
     }
 
     private void loadUserData() {
@@ -52,26 +44,50 @@ public class DoctorRegistrationFormController {
         txtEmail.setText(selectedUser.getEmail());
     }
 
-    public void submitDataOnAction(ActionEvent actionEvent) {
-
-        if (Database.doctorTable.stream().filter(e->e.getNic().equals(txtNic.getText().trim())).findFirst().isPresent()){
-            new Alert(Alert.AlertType.WARNING, "NIC Conflict!").show();
-            btnSubmit.setDisable(true);
-            return;
+    private String generateDoctorId() throws SQLException, ClassNotFoundException {
+        ResultSet result =
+                CrudUtil.execute("SELECT doctor_id FROM doctor ORDER BY" +
+                        " doctor_id DESC LIMIT 1"); // if the primary key is a string don't use this method
+        // unsigned, cast, subscribe
+        if (result.next()) {
+            String selectedId = result.getString(1); // D-1**
+            String[] splitData = selectedId.split("-"); // string tokenizer, String format
+            String splitId = splitData[1];
+            int id = Integer.parseInt(splitId); // unboxing
+            id++;
+            return "D-" + id;
         }
-
-        DoctorDto doctorDto = new DoctorDto(
-                txtFirstName.getText().trim(),
-                txtLastName.getText().trim(),
-                txtNic.getText(),
-                txtContact.getText(),
-                txtEmail.getText(),
-                txtSpecializations.getText(),
-                txtAddress.getText(),
-                rBtnMale.isSelected() ? GenderType.MALE : GenderType.FE_MALE
-        );
-        Database.doctorTable.add(doctorDto);
-        Stage stage = (Stage) doctorRegistrationContext.getScene().getWindow();
-        stage.close();
+        return "D-1";
     }
+
+    public void submitDataOnAction(ActionEvent actionEvent) {
+        try {
+            String docId = generateDoctorId();
+            boolean isSaved = CrudUtil.execute("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?)",
+                    docId,
+                    txtFirstName.getText(),txtLastName.getText(),
+                    txtContact.getText(),txtEmail.getText(),
+                    txtSpecializations.getText(),
+                    txtAddress.getText(),
+                    rBtnMale.isSelected()?GenderType.MALE.name():GenderType.FE_MALE.name()
+                    );
+          if (isSaved){
+              new Alert(Alert.AlertType.INFORMATION, "Welcome Doctor...").show();
+              setUi("DoctorDashboardForm");
+          }
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setUi(String location) throws IOException {
+        Stage stage = (Stage) doctorRegistrationContext.getScene().getWindow();
+        System.out.println(stage);
+        stage.setScene(new Scene(FXMLLoader.
+                load(getClass().getResource("../view/" + location + ".fxml"))));
+        stage.centerOnScreen();
+    }
+
+
 }

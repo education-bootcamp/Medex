@@ -32,18 +32,20 @@ public class LoginFormController {
             ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",
                     email, accountType.name());
             if (resultSet.next()) {
+
+                Cookie.selectedUser = new User(
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        "",
+                        accountType
+                );
+
                 if (new PasswordConfig().decrypt(password, resultSet.getString("password"))) {
                     if (accountType.equals(AccountType.PATIENT)) {
                         ResultSet selectedPatientResult =
                                 CrudUtil.execute("SELECT patient_id FROM patient WHERE email=?", email);
                         if (selectedPatientResult.next()) {
-                            Cookie.selectedUser = new User(
-                                    resultSet.getString("first_name"),
-                                    resultSet.getString("last_name"),
-                                    resultSet.getString("email"),
-                                    "",
-                                    AccountType.PATIENT
-                            );
                             setUi("PatientDashboardForm");
                         } else {
                             setUi("PatientRegistrationForm");
@@ -52,13 +54,6 @@ public class LoginFormController {
                         ResultSet selectedDoctorResult =
                                 CrudUtil.execute("SELECT doctor_id FROM doctor WHERE email=?", email);
                         if (selectedDoctorResult.next()) {
-                            Cookie.selectedUser = new User(
-                                    resultSet.getString("first_name"),
-                                    resultSet.getString("last_name"),
-                                    resultSet.getString("email"),
-                                    "",
-                                    AccountType.DOCTOR
-                            );
                             setUi("DoctorDashboardForm");
                         } else {
                             setUi("DoctorRegistrationForm");

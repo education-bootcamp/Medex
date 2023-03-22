@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -11,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="doctorRegistrationContext" prefHeight="428.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.DoctorRegistrationFormController">
+<AnchorPane fx:id="patientRegistrationContext" prefHeight="428.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.PatientRegistrationFormController">
    <children>
-      <Label layoutX="24.0" layoutY="12.0" text="Doctor Registration" textFill="#ff6600">
+      <Label layoutX="24.0" layoutY="12.0" text="Patient Registration" textFill="#ff6600">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -44,17 +45,12 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSpecializations" layoutX="24.0" layoutY="139.0" prefHeight="29.0" prefWidth="216.0" promptText="Specializations">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </TextField>
-      <TextArea fx:id="txtAddress" layoutX="24.0" layoutY="181.0" prefHeight="200.0" prefWidth="660.0" promptText="Address">
+      <TextArea fx:id="txtAddress" layoutX="24.0" layoutY="181.0" prefHeight="177.0" prefWidth="660.0" promptText="Address">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </TextArea>
-      <JFXRadioButton fx:id="rBtnMale" layoutX="262.0" layoutY="144.0" selected="true" text="Male">
+      <JFXRadioButton fx:id="rBtnMale" layoutX="310.0" layoutY="144.0" selected="true" text="Male">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -62,12 +58,12 @@
             <ToggleGroup fx:id="gender" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton layoutX="340.0" layoutY="144.0" text="Fe Male" toggleGroup="$gender">
+      <JFXRadioButton layoutX="388.0" layoutY="144.0" text="Fe Male" toggleGroup="$gender">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXRadioButton>
-      <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="582.0" layoutY="384.0" onAction="#submitDataOnAction" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="582.0" layoutY="384.0" onAction="#submitDataOnAction" style="-fx-background-color: #0D99FF;" text="Submit Data" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -75,5 +71,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXDatePicker fx:id="txtDob" layoutX="25.0" layoutY="141.0" prefHeight="25.0" prefWidth="223.0" promptText="Date of birh" />
    </children>
 </AnchorPane>

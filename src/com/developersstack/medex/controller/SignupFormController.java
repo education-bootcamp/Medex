@@ -33,9 +33,10 @@ public class SignupFormController {
                 rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
         try {
+            String id = new IdGenerator().generateId("SELECT user_id FROM user ORDER BY user_id DESC 1","U");
             boolean isSaved = CrudUtil.execute(
-                    "INSERT INTO user VALUES (?,?,?,?,?,?)",
-                    new IdGenerator().generateId(),user.getFirstName(),user.getLastName(),user.getEmail(),
+                    "INSERT INTO user VALUES (?,?,?,?,?,?)",id
+                    ,user.getFirstName(),user.getLastName(),user.getEmail(),
                     user.getPassword(),user.getAccountType().name()
             );
             if (isSaved){

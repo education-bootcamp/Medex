@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="appointmentContext" prefHeight="407.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.AppointmentsFormController">
    <children>
       <Label layoutX="64.0" layoutY="23.0" text="Appointments" textFill="#ff6600">
@@ -33,7 +32,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXRadioButton layoutX="25.0" layoutY="113.0" selected="true" text="All" textFill="#5b0909">
+      <JFXRadioButton fx:id="rBtnAll" layoutX="25.0" layoutY="113.0" selected="true" text="All" textFill="#5b0909">
          <toggleGroup>
             <ToggleGroup fx:id="type" />
          </toggleGroup>

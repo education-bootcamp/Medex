@@ -5,6 +5,8 @@ import com.developersstack.medex.util.CrudUtil;
 import com.developersstack.medex.view.tm.AllAppointmentTm;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +37,7 @@ public class AppointmentsFormController {
     public TableColumn colAmount;
     public TableColumn colState;
     public TableColumn colManage;
+    public JFXRadioButton rBtnAll;
     String selectedDoctorId = "";
 
     public void initialize() {
@@ -48,6 +51,30 @@ public class AppointmentsFormController {
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colPatient.setCellValueFactory(new PropertyValueFactory<>("patient"));
         colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+        rBtnPending.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                                Boolean oldValue, Boolean newValue) {
+                if (newValue){
+                    loadAppointments();
+                }
+            }
+        });
+        rBtnCompleted.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue){
+                loadAppointments();
+            }
+        });
+        rBtnAll.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                                Boolean oldValue, Boolean newValue) {
+                if (newValue){
+                    loadAppointments();
+                }
+            }
+        });
 
     }
 

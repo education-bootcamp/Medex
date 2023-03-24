@@ -89,4 +89,8 @@ public class DoctorDashboardFormController {
     public void navigateToPatientManagementPage(ActionEvent actionEvent) throws IOException {
         setUi("PatientManagementForm");
     }
+
+    public void navigateToAppointmentsManagementPage(ActionEvent actionEvent) throws IOException {
+        setUi("AppointmentsForm");
+    }
 }

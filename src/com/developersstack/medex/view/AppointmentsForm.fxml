@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="appointmentContext" prefHeight="407.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.medex.controller.AppointmentsFormController">
+   <children>
+      <Label layoutX="64.0" layoutY="23.0" text="Appointments" textFill="#ff6600">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="34.0" layoutY="52.0" prefHeight="2.0" prefWidth="762.0" />
+      <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="23.0" onAction="#backToHomeOnAction" style="-fx-background-color: #012E6A;" text="&lt;-" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXDatePicker fx:id="txtDateFrom" layoutX="25.0" layoutY="65.0" prefHeight="25.0" prefWidth="132.0" promptText="From" />
+      <JFXDatePicker fx:id="txtDateTo" layoutX="175.0" layoutY="65.0" prefHeight="25.0" prefWidth="132.0" promptText="To" />
+      <JFXButton buttonType="RAISED" layoutX="334.0" layoutY="65.0" onAction="#searchData" style="-fx-background-color: #0D99FF;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXRadioButton layoutX="25.0" layoutY="113.0" selected="true" text="All" textFill="#5b0909">
+         <toggleGroup>
+            <ToggleGroup fx:id="type" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="rBtnPending" layoutX="90.0" layoutY="113.0" text="Pending" textFill="#5b0909" toggleGroup="$type" />
+      <JFXRadioButton fx:id="rBtnCompleted" layoutX="185.0" layoutY="113.0" text="Completed" textFill="#5b0909" toggleGroup="$type" />
+      <TableView fx:id="tblAppointment" layoutX="24.0" layoutY="144.0" prefHeight="254.0" prefWidth="775.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="75.0" text="#Id" />
+          <TableColumn fx:id="colPatient" prefWidth="204.0" text="Patient" />
+            <TableColumn fx:id="colDate" prefWidth="128.0" text="Date" />
+            <TableColumn fx:id="colTime" prefWidth="87.0" text="Time" />
+            <TableColumn fx:id="colAmount" prefWidth="90.0" text="Amount" />
+            <TableColumn fx:id="colState" prefWidth="91.0" text="Check State" />
+            <TableColumn fx:id="colManage" prefWidth="99.0" text="Manage" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
